@@ -11,7 +11,7 @@ export default function Document() {
           crossOrigin=""
         />
       </Head>
-      <body className='h-screen'>
+      <body className='min-h-screen bg-silver'>
         <Main />
         <NextScript />
       </body>

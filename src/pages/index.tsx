@@ -14,16 +14,16 @@ export default function Home() {
       <HeroHeader />
       <div className='flex flex-col gap-2 items-end p-8'>
         <Link href='/register'>
-          <Button className='' color='purple'>Cadastrar empresa</Button>
+          <Button className='bg-goldenrod'>Cadastrar empresa</Button>
         </Link>
         <Link href='/login'>
-          <Button color='purple'>Login</Button>
-
+          <Button className='bg-goldenrod'>Login</Button>
         </Link>
       </div>
+
       <Map />
-      <div className='flex flex-col items-center mt-4 border-purple-400 border-2 mx-8 mb-8'>
-        <Typography variant="h3" className='mb-2'>Como o projeto funciona</Typography>
+      <div className='flex flex-col items-center mt-4 border-darkgrey border-2 mx-8 mb-8'>
+        <Typography variant="h3" className='mb-2 text-center'>Como o projeto funciona</Typography>
         <Typography className='mx-8'>
           Material Tailwind is an easy to use components library for Tailwind CSS
           and Material Design. It provides a simple way to customize your
