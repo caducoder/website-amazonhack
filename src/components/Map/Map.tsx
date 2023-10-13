@@ -1,8 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
 import 'leaflet/dist/leaflet.css'
-import { MapContainer, Marker, Polygon, Popup, TileLayer, PolygonProps } from 'react-leaflet'
-import { Icon, LatLngExpression } from 'leaflet'
+import { MapContainer, Marker, Polygon, Popup, TileLayer, PolygonProps, useMapEvents } from 'react-leaflet'
+import { Icon, LatLngExpression, LatLng } from 'leaflet'
 import { Typography } from '@material-tailwind/react'
+import RatingPopup from '../RatingPopup'
+
+function LocationMarker() {
+  const [position, setPosition] = useState<LatLng | null>(null)
+  const map = useMapEvents({
+    click() {
+      map.locate()
+    },
+    locationfound(e) {
+      setPosition(e.latlng)
+      map.flyTo(e.latlng, map.getZoom())
+    },
+  })
+
+  return position === null ? null : (
+    <Marker
+      position={position}
+      icon={new Icon({ iconUrl: '/your-location.png', iconSize: [25, 41], iconAnchor: [12, 41] })}
+    >
+      <Popup className='mt-[-10px]'>Você está aqui</Popup>
+    </Marker>
+  )
+}
 
 const amazonasCoordinates: LatLngExpression[] = [
   [-2.02, -56.14],
@@ -12,13 +35,13 @@ const amazonasCoordinates: LatLngExpression[] = [
   [-8.67, -58.62]
 ]
 
-const purpleOptions = { color: 'gray' }
+const greenColor = { color: 'green' }
 
 const Map = () => {
   return (
-    <section className='flex justify-center'>
+    <section className='flex justify-center flex-col'>
       <MapContainer
-        className='h-[400px] w-[80%]'
+        className='h-[400px] w-[80%] mx-auto'
         center={[-3.10, -60]} zoom={10}
         scrollWheelZoom={true}
       >
@@ -35,8 +58,9 @@ const Map = () => {
               Status: <Typography as={'span'} color='green' variant='small' className='font-bold'>Ativo</Typography>
             </Typography>
           </Popup>
-          <Polygon pathOptions={purpleOptions} positions={amazonasCoordinates} />
+          <Polygon pathOptions={greenColor} positions={amazonasCoordinates} />
         </Marker>
+        <LocationMarker />
       </MapContainer>
     </section>
   )
