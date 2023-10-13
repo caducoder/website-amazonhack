@@ -1,3 +1,4 @@
+import CommomHeader from '@/components/CommomHeader'
 import CompanyRegisterForm from '@/components/CompanyRegisterForm'
 import { Box, Typography } from '@mui/material'
 import { useRouter } from 'next/router'
@@ -7,16 +8,7 @@ const Register = () => {
   const router = useRouter()
   return (
     <>
-      <Box component={'header'} className='bg-white h-[170px] flex items-center justify-between'>
-        <Box className='flex items-center justify-between w-full px-4 sm:px-16 gap-4 flex-col lg:flex-row'>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, cursor: 'pointer' }} onClick={() => router.push('/')}>
-            <img src={'/logo-green.png'} alt='' />
-            <Typography className='text-mainGreen text-3xl sm:text-5xl'>
-              AmazonHack
-            </Typography>
-          </Box>
-        </Box>
-      </Box>
+      <CommomHeader />
       <section className="w-[80%] mx-auto">
         <Box className='mb-10'>
           <Typography component={'h1'} gutterBottom className='text-center text-[40px] text-goldenroad font-semibold'>
