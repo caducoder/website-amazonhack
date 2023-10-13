@@ -7,7 +7,7 @@ export const HeroHeader = () => {
     <Box component={'header'} className='bg-mainGreen h-[220px] flex items-center justify-between'>
       <Box className='flex items-center justify-between w-full px-16 gap-4 flex-col lg:flex-row'>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          <img src={'/logo.svg'} alt='' />
+          <img src={'/logo-white.svg'} alt='' />
           <Typography variant='h3' color='white'>AmazonHack</Typography>
         </Box>
         <Box sx={{ display: 'flex', flexDirection: 'row', gap: 8 }}>

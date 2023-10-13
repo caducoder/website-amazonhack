@@ -9,7 +9,7 @@ function Footer() {
     <Box component={'footer'} className='h-[400px] bg-mainGreen mt-[160px] text-white flex flex-row items-center'>
       <div className='flex flex-row justify-between items-center w-full px-[100px]'>
         <div className='flex flex-col gap-4'>
-          <img src="/logo.svg" alt="" />
+          <img src="/logo-white.svg" alt="" />
           <Typography className='text-[28px]'>AmazonHack</Typography>
           <Typography width={207}>
             Juntos tornamos Amazonas mais conectado

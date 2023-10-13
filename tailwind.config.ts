@@ -9,6 +9,7 @@ const config: Config = {
   theme: {
     colors: {
       'mainGreen': '#107D44',
+      'lightGreen': '#6fbf73',
       'darkGreen': '#243219',
       'silver': '#C4C5C0',
       'darkgrey': '#595a55',
@@ -16,7 +17,8 @@ const config: Config = {
       'white': '#FFFFFF',
       'goldenroad': '#BC873E',
       'light-goldenroad': '#C6AE80',
-      'dark-goldenroad': '#B87333'
+      'dark-goldenroad': '#B87333',
+      'red': '#d32f2f'
     }
   },
   plugins: [],

@@ -2,18 +2,29 @@ import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Button } from "@mui/material";
 import Link from 'next/link';
+import InputComponent from '../InputComponent';
 
-type FormData = {
-  nome: string,
+export interface CompanyForm {
+  nomeFantasia: string,
   cnpj: string,
   endereco: string,
   email: string,
-  contato: string,
-  senha: string
+  senha: string,
+  razaoSocial: string,
+  inscricaoEstadual: string,
+  inscricaoMunicipal: string,
+  celular: string,
+  telefone: string,
+  cep: string,
+  logradouro: string,
+  bairro: string,
+  complemento: string,
+  uf: string,
+  mun: string
 }
 
 function CompanyRegisterForm() {
-  const { handleSubmit, control, formState: { errors } } = useForm<FormData>();
+  const { handleSubmit, control, formState: { errors } } = useForm<CompanyForm>();
 
   const onSubmit = (data: any) => {
     console.log(data);
@@ -21,153 +32,128 @@ function CompanyRegisterForm() {
   };
 
   return (
-
-    <form onSubmit={handleSubmit(onSubmit)} className="bg-white shadow-md rounded pb-8">
-      <h2 className="text-2xl text-center mb-4 py-6 bg-purple-300 text-darkbrown bg-goldenrod">
-        Cadastro de Empresa de Telefonia
-      </h2>
-
-      <div className='px-8'>
-
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="nome">
-            Nome da Empresa
-          </label>
-          {/* <Input variant='outlined' /> */}
-          <Controller
-            name="nome"
+    <form onSubmit={handleSubmit(onSubmit)} className="bg-white rounded pb-8 ">
+      <div className='flex flex-col sm:flex-row gap-4 justify-center'>
+        <div>
+          <InputComponent
             control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <input
-                {...field}
-                type="text"
-                id="nome"
-                className={`w-full appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.nome ? 'border-red-500' : ''}`}
-              />
-            )}
+            error={errors.cnpj}
+            label='CNPJ'
+            name='cnpj'
+            required
           />
-          {errors.nome && <p className="text-red-500 text-xs italic">Campo obrigatório</p>}
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="cnpj">
-            CNPJ
-          </label>
-          <Controller
-            name="cnpj"
+          <InputComponent
             control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <input
-                {...field}
-                type="text"
-                id="cnpj"
-                className={`w-full appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.cnpj ? 'border-red-500' : ''}`}
-              />
-            )}
+            error={errors.nomeFantasia}
+            label='Nome Fantasia'
+            name='nomeFantasia'
           />
-          {errors.cnpj && <p className="text-red-500 text-xs italic">Campo obrigatório</p>}
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="endereco">
-            Endereço da Sede
-          </label>
-          <Controller
-            name="endereco"
+          <InputComponent
             control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <input
-                {...field}
-                type="text"
-                id="endereco"
-                className={`w-full appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.endereco ? 'border-red-500' : ''}`}
-              />
-            )}
+            error={errors.razaoSocial}
+            label='Razão Social'
+            name='razaoSocial'
           />
-          {errors.endereco && <p className="text-red-500 text-xs italic">Campo obrigatório</p>}
-        </div>
+          <div className='flex flex-row gap-2'>
+            <InputComponent
+              control={control}
+              error={errors.inscricaoEstadual}
+              label='Inscrição Estadual'
+              name='inscricaoEstadual'
+              required
+            />
+            <InputComponent
+              control={control}
+              error={errors.inscricaoMunicipal}
+              label='Inscrição Municipal'
+              name='inscricaoMunicipal'
+            />
+          </div>
+          <div className='flex flex-row gap-2'>
+            <InputComponent
+              control={control}
+              error={errors.celular}
+              label='Celular'
+              name='celular'
+              required
+            />
+            <InputComponent
+              control={control}
+              error={errors.telefone}
+              label='Telefone'
+              name='telefone'
+            />
+          </div>
 
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-            Email
-          </label>
-          <Controller
-            name="email"
+          <div className='flex flex-row gap-2'>
+            <InputComponent
+              control={control}
+              error={errors.email}
+              label='Email'
+              name='email'
+              required
+            />
+            <InputComponent
+              control={control}
+              error={errors.senha}
+              label='Senha'
+              name='senha'
+              required
+            />
+          </div>
+
+        </div>
+        <div >
+          <div className='flex flex-row gap-2'>
+            <InputComponent
+              control={control}
+              label='CEP'
+              name='cep'
+              error={errors.cep}
+              required
+            />
+            <InputComponent
+              control={control}
+              label='Logradouro'
+              name='logradouro'
+              error={errors.logradouro}
+            />
+          </div>
+          <InputComponent
             control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <input
-                {...field}
-                type="text"
-                id="email"
-                className={`w-full appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.email ? 'border-red-500' : ''}`}
-              />
-            )}
+            label='Bairro'
+            name='bairro'
+            error={errors.bairro}
           />
-          {errors.email && <p className="text-red-500 text-xs italic">Campo obrigatório</p>}
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="contato">
-            Contato
-          </label>
-          <Controller
-            name="contato"
+          <InputComponent
             control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <input
-                {...field}
-                type="text"
-                id="contato"
-                className={`w-full appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.contato ? 'border-red-500' : ''}`}
-              />
-            )}
+            label='Complemento'
+            name='complemento'
+            error={errors.complemento}
           />
-          {errors.contato && <p className="text-red-500 text-xs italic">Campo obrigatório</p>}
+          <div className='flex flex-row gap-2'>
+            <InputComponent
+              control={control}
+              label='UF'
+              name='uf'
+              error={errors.uf}
+            />
+            <InputComponent
+              control={control}
+              label='Mun'
+              name='mun'
+              error={errors.mun}
+            />
+          </div>
         </div>
+      </div>
+      <div className="flex items-center justify-center">
 
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="senha">
-            Senha
-          </label>
-          <Controller
-            name="senha"
-            control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <input
-                {...field}
-                type="password"
-                id="senha"
-                className={`w-full appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.senha ? 'border-red-500' : ''}`}
-              />
-            )}
-          />
-          {errors.senha && <p className="text-red-500 text-xs italic">Campo obrigatório</p>}
-        </div>
-
-        <div className="flex items-center justify-between">
-          <Link href='/'>
-            <Button
-              variant='text'
-            >
-              Voltar
-            </Button>
-          </Link>
-          <Button
-            type="submit"
-            className="bg-goldenrod text-white"
-            variant='contained'
-            sx={{ ":hover": { bgcolor: "#234" } }}
-            color='primary'
-          >
-            Cadastrar
-          </Button>
-        </div>
+        <Button
+          type='submit'
+          className='bg-mainGreen text-white hover:bg-lightGreen rounded-2xl px-20 py-2 mt-14'>
+          Cadastrar
+        </Button>
       </div>
     </form>
 
