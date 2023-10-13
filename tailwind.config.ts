@@ -7,7 +7,13 @@ module.exports = withMT({
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {},
+    colors: {
+      'goldenrod': '#BC873E',
+      'lightbrown': '#C6AE80',
+      'silver': '#C4C5C0',
+      'darkgrey': '#595a55',
+      'darkbrown': '#110809'
+    }
   },
   plugins: [],
 })
