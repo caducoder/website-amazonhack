@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { Button, Input } from "@material-tailwind/react";
+import { Button } from "@mui/material";
 import Link from 'next/link';
 
 type FormData = {
@@ -22,8 +22,8 @@ function CompanyRegisterForm() {
 
   return (
 
-    <form onSubmit={handleSubmit(onSubmit)} className="bg-white shadow-md rounded border-x-2 pb-8">
-      <h2 className="text-2xl text-center mb-4 py-6 bg-purple-300 text-white">
+    <form onSubmit={handleSubmit(onSubmit)} className="bg-white shadow-md rounded pb-8">
+      <h2 className="text-2xl text-center mb-4 py-6 bg-purple-300 text-darkbrown bg-goldenrod">
         Cadastro de Empresa de Telefonia
       </h2>
 
@@ -160,7 +160,10 @@ function CompanyRegisterForm() {
           </Link>
           <Button
             type="submit"
-            className="bg-goldenrod"
+            className="bg-goldenrod text-white"
+            variant='contained'
+            sx={{ ":hover": { bgcolor: "#234" } }}
+            color='primary'
           >
             Cadastrar
           </Button>

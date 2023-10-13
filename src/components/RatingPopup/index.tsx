@@ -1,12 +1,13 @@
-import React from 'react'
-import {
-  Button,
-  Dialog,
-  DialogHeader,
-  DialogBody,
-  DialogFooter,
-} from "@material-tailwind/react";
-import { Rating, Typography } from "@material-tailwind/react";
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import Typography from '@mui/material/Typography';
+import Rating from '@mui/material/Rating';
+import Box from '@mui/material/Box';
+import StarIcon from '@mui/icons-material/Star';
 
 const ratingLabel = [
   "Péssima",
@@ -16,46 +17,77 @@ const ratingLabel = [
   "Excelente"
 ]
 
+function getLabelText(value: number) {
+  return `${value} Star${value !== 1 ? 's' : ''}, ${ratingLabel[value]}`;
+}
+
 function RatingPopup() {
   const [open, setOpen] = React.useState(false);
-  const [rated, setRated] = React.useState(0);
+  const [value, setValue] = React.useState<number | null>(null);
 
-  const handleOpen = () => setOpen(!open);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleRatingConfirm = () => {
+    console.log('Nota: ', value)
+  }
 
   return (
     <>
       <Button
-        onClick={handleOpen}
-        color='blue'
-        variant="gradient"
-        className='w-fit ml-8 mb-4'
+        variant="contained"
+        color='secondary'
+        className="bg-cyan text-white"
+        sx={{ mb: 4 }}
+        onClick={handleClickOpen}
       >
         Classificar internet da sua região
       </Button>
-      <Dialog open={open} handler={handleOpen}>
-        <DialogHeader>Qualidade da internet</DialogHeader>
-        <DialogBody divider>
-          <div className="flex flex-col items-center gap-2 py-4">
-            <Rating value={0} onChange={(value) => setRated(value)} />
-            <Typography color="blue-gray" className="font-medium">
-              {rated != 0 && ratingLabel[rated - 1]}
-            </Typography>
-          </div>
-          Sua avaliação nos ajuda a tomar medidas para aprimorar a experiência online para todos. Obrigado por sua colaboração!
-        </DialogBody>
-        <DialogFooter>
-          <Button
-            variant="text"
-            color="red"
-            onClick={handleOpen}
-            className="mr-1"
+      <Dialog
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+      >
+        <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
+          Qualidade da internet
+        </DialogTitle>
+        <DialogContent dividers >
+          <Box
+            sx={{
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textAlign: 'center'
+            }}
           >
-            <span>Cancelar</span>
+            <Rating
+              name="hover-feedback"
+              value={value}
+              getLabelText={getLabelText}
+              onChange={(event, newValue) => {
+                setValue(newValue);
+              }}
+              emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+            />
+            {value !== null && (
+              <Box sx={{ textAlign: 'center' }}>{ratingLabel[value - 1]}</Box>
+            )}
+          </Box>
+          <Typography gutterBottom>
+            Sua avaliação nos ajuda a tomar medidas para aprimorar a experiência online para todos. Obrigado por sua colaboração!
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} variant='text' color='error'>Cancelar</Button>
+          <Button autoFocus onClick={handleRatingConfirm} color='success'>
+            Confirmar
           </Button>
-          <Button variant="gradient" color="green" onClick={handleOpen}>
-            <span>Confirmar</span>
-          </Button>
-        </DialogFooter>
+        </DialogActions>
       </Dialog>
     </>
   )

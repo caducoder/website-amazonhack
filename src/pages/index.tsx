@@ -1,5 +1,5 @@
 import { Inter } from 'next/font/google'
-import { Button, Typography } from "@material-tailwind/react";
+import { Button, Typography } from "@mui/material";
 import { HeroHeader } from '@/components/HeroHeader';
 import Map from '@/components/Map/';
 import Link from 'next/link'
@@ -15,10 +15,24 @@ export default function Home() {
       <HeroHeader />
       <div className='flex flex-col gap-2 items-end p-8'>
         <Link href='/register'>
-          <Button className='bg-goldenrod'>Cadastrar empresa</Button>
+          <Button
+            className="bg-goldenrod text-white"
+            variant='contained'
+            sx={{ ":hover": { bgcolor: "#234" } }}
+            color='primary'
+          >
+            Cadastrar empresa
+          </Button>
         </Link>
         <Link href='/login'>
-          <Button className='bg-goldenrod'>Login</Button>
+          <Button
+            className="bg-goldenrod text-white"
+            variant='contained'
+            sx={{ ":hover": { bgcolor: "#234" } }}
+            color='primary'
+          >
+            Login
+          </Button>
         </Link>
       </div>
       <RatingPopup />

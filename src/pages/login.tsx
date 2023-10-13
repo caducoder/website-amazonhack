@@ -1,4 +1,4 @@
-import { Button } from '@material-tailwind/react';
+import { Button } from '@mui/material';
 import Link from 'next/link';
 import React from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
@@ -67,7 +67,10 @@ const LoginForm: React.FC = () => {
             </Button>
           </Link>
           <Button
-            className='bg-goldenrod'
+            className="bg-goldenrod text-white"
+            variant='contained'
+            sx={{ ":hover": { bgcolor: "#234" } }}
+            color='primary'
             type="submit"
           >
             Entrar

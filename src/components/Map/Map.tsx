@@ -2,7 +2,7 @@ import 'leaflet/dist/leaflet.css'
 import React, { useState } from 'react'
 import { MapContainer, Marker, Polygon, Popup, TileLayer, useMapEvents } from 'react-leaflet'
 import { Icon, LatLngExpression, LatLng } from 'leaflet'
-import { Typography } from '@material-tailwind/react'
+import { Typography } from '@mui/material'
 
 function LocationMarker() {
   const [position, setPosition] = useState<LatLng | null>(null)
@@ -54,8 +54,8 @@ const Map = () => {
           icon={new Icon({ iconUrl: '/tower.png', iconSize: [25, 41], iconAnchor: [12, 41] })}
         >
           <Popup>
-            <Typography variant="small">
-              Status: <Typography as={'span'} color='green' variant='small' className='font-bold'>Ativo</Typography>
+            <Typography variant='body1'>
+              Status: <Typography component={'span'} variant='body1' className='font-bold'>Ativo</Typography>
             </Typography>
           </Popup>
           <Polygon pathOptions={greenColor} positions={amazonasCoordinates} />
