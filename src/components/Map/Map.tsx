@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
 import 'leaflet/dist/leaflet.css'
-import { MapContainer, Marker, Polygon, Popup, TileLayer, PolygonProps, useMapEvents } from 'react-leaflet'
+import React, { useState } from 'react'
+import { MapContainer, Marker, Polygon, Popup, TileLayer, useMapEvents } from 'react-leaflet'
 import { Icon, LatLngExpression, LatLng } from 'leaflet'
 import { Typography } from '@material-tailwind/react'
-import RatingPopup from '../RatingPopup'
 
 function LocationMarker() {
   const [position, setPosition] = useState<LatLng | null>(null)
@@ -40,7 +39,7 @@ const greenColor = { color: 'green' }
 const Map = () => {
   return (
     <section className='flex justify-center flex-col'>
-      <RatingPopup />
+
       <MapContainer
         className='h-[400px] w-[80%] mx-auto'
         center={[-3.10, -60]} zoom={10}

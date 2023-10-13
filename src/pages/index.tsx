@@ -3,6 +3,7 @@ import { Button, Typography } from "@material-tailwind/react";
 import { HeroHeader } from '@/components/HeroHeader';
 import Map from '@/components/Map/';
 import Link from 'next/link'
+import RatingPopup from '@/components/RatingPopup';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,7 +21,7 @@ export default function Home() {
           <Button className='bg-goldenrod'>Login</Button>
         </Link>
       </div>
-
+      <RatingPopup />
       <Map />
       <div className='flex flex-col items-center mt-4 border-darkgrey border-2 mx-8 mb-8'>
         <Typography variant="h3" className='mb-2 text-center'>Como o projeto funciona</Typography>
