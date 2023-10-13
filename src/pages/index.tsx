@@ -1,6 +1,7 @@
 import { Inter } from 'next/font/google'
 import { Button, Typography } from "@material-tailwind/react";
 import { HeroHeader } from '@/components/HeroHeader';
+import Map from '@/components/Map/';
 import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -20,8 +21,8 @@ export default function Home() {
 
         </Link>
       </div>
-
-      <div className='flex flex-col items-center mt-4 border-purple-400 border-2 mx-8'>
+      <Map />
+      <div className='flex flex-col items-center mt-4 border-purple-400 border-2 mx-8 mb-8'>
         <Typography variant="h3" className='mb-2'>Como o projeto funciona</Typography>
         <Typography className='mx-8'>
           Material Tailwind is an easy to use components library for Tailwind CSS
