@@ -41,9 +41,9 @@ const Map = () => {
     <section className='flex justify-center flex-col'>
 
       <MapContainer
-        className='h-[400px] w-[80%] mx-auto'
+        className='h-[600px] w-full mx-auto mt-[120px]'
         center={[-3.10, -60]} zoom={10}
-        scrollWheelZoom={true}
+        scrollWheelZoom={false}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

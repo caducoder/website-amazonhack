@@ -8,13 +8,15 @@ const config: Config = {
   ],
   theme: {
     colors: {
-      'goldenrod': '#BC873E',
-      'lightbrown': '#C6AE80',
+      'mainGreen': '#107D44',
+      'darkGreen': '#243219',
       'silver': '#C4C5C0',
       'darkgrey': '#595a55',
       'darkbrown': '#110809',
       'white': '#FFFFFF',
-      'cyan': '#19857b'
+      'goldenroad': '#BC873E',
+      'light-goldenroad': '#C6AE80',
+      'dark-goldenroad': '#B87333'
     }
   },
   plugins: [],
