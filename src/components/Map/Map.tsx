@@ -40,6 +40,7 @@ const greenColor = { color: 'green' }
 const Map = () => {
   return (
     <section className='flex justify-center flex-col'>
+      <RatingPopup />
       <MapContainer
         className='h-[400px] w-[80%] mx-auto'
         center={[-3.10, -60]} zoom={10}
