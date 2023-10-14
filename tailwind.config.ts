@@ -10,7 +10,7 @@ const config: Config = {
     colors: {
       'mainGreen': '#107D44',
       'lightGreen': '#6fbf73',
-      'darkGreen': '#243219',
+      'darkGreen': '#21874d',
       'silver': '#C4C5C0',
       'darkgrey': '#595a55',
       'darkbrown': '#110809',

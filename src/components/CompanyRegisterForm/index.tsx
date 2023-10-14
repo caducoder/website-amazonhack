@@ -151,7 +151,7 @@ function CompanyRegisterForm() {
 
         <button
           type='submit'
-          className='bg-mainGreen transition text-white hover:bg-lightGreen rounded-2xl px-20 py-2 mt-14'>
+          className='bg-mainGreen transition text-white hover:bg-darkGreen rounded-2xl px-20 py-2 mt-14'>
           Cadastrar
         </button>
       </div>

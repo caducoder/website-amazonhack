@@ -1,49 +1,54 @@
 import CommomHeader from '@/components/CommomHeader';
-import { Button } from '@mui/material';
-import Link from 'next/link';
+import router from 'next/router'
 import React from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 
-interface FormData {
+export interface LoginData {
   email: string;
   password: string;
 }
 
 const LoginForm: React.FC = () => {
-  const { control, handleSubmit, formState: { errors } } = useForm<FormData>();
+  const { control, handleSubmit, formState: { errors } } = useForm<LoginData>();
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log('Dados do formulário:', data);
+  const onSubmit: SubmitHandler<LoginData> = (data) => {
+    console.log('Dados do formulário login:', data);
   };
 
   return (
     <>
       <CommomHeader />
-      <div className="w-full h-screen flex items-center justify-center">
-        <form onSubmit={handleSubmit(onSubmit)} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-          <h2 className="text-2xl text-center mb-4">Login</h2>
+      <div className="w-full h-['00%] flex flex-col gap-8">
+        <h2 className="text-[40px] text-goldenroad text-center flex flex-col justify-center items-center font-semibold ">
+          Faça seu login
+        </h2>
+        <form onSubmit={handleSubmit(onSubmit)} className="bg-white rounded px-8 pt-6 w-full sm:w-[650px] flex flex-col justify-center items-center mx-auto">
 
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+          <div className="mb-6 w-full">
+            <label className="block text-gray-700 text-lg font-semibold mb-2" htmlFor={'email'}>
               Email
             </label>
+            {/* <Input variant='outlined' /> */}
             <Controller
-              name="email"
+              name={'email'}
               control={control}
+              defaultValue=""
               rules={{ required: true }}
               render={({ field }) => (
                 <input
                   {...field}
+                  placeholder='Email'
                   type="text"
-                  className={`w-full appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.email ? 'border-red-500' : ''}`}
-                  placeholder="Seu email"
+                  id="nome"
+                  className={`w-full appearance-none border border-darkgrey rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.email ? 'border-red' : ''}`}
                 />
               )}
             />
+            {errors.email && <p className="text-red text-xs italic">Campo obrigatório</p>}
           </div>
 
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+          <div className="mb-4 w-full">
+            <label className="block text-gray-700 text-lg font-semibold mb-2" htmlFor="password">
               Senha
             </label>
             <Controller
@@ -54,32 +59,34 @@ const LoginForm: React.FC = () => {
                 <input
                   {...field}
                   type="password"
-                  className={`w-full appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.email ? 'border-red-500' : ''}`}
+                  className={`w-full appearance-none border border-darkgrey rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.password ? 'border-red' : ''}`}
                   placeholder="Sua senha"
                 />
               )}
             />
           </div>
+          <div className='w-full relative'>
+            <button type='button' className='absolute right-0 font-light text-darkgrey'>Esqueceu a senha?</button>
 
-          <div className="flex items-center justify-between">
-            <Link href='/'>
-              <Button
-                variant='text'
-              >
-                Voltar
-              </Button>
-            </Link>
-            <Button
-              className="bg-goldenrod text-white"
-              variant='contained'
-              sx={{ ":hover": { bgcolor: "#234" } }}
-              color='primary'
+          </div>
+          <div className="flex items-center justify-between mt-16">
+            <button
+              className="bg-mainGreen text-white py-2 px-24 font-semibold rounded-xl hover:bg-darkGreen transition"
               type="submit"
             >
               Entrar
-            </Button>
+            </button>
           </div>
+
         </form>
+        <div className=' text-center'>
+          <p>
+            Não possui cadastro? {' '}
+            <button className='whitespace-nowrap font-semibold' onClick={() => router.push('/register')}>
+              Cadastre-se aqui
+            </button>
+          </p>
+        </div>
       </div>
     </>
   );

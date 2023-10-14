@@ -1,6 +1,7 @@
 import React from 'react'
 import { Control, FieldErrors, Controller, FieldError } from 'react-hook-form'
 import { CompanyForm } from '../CompanyRegisterForm'
+import { LoginData } from '@/pages/login'
 
 interface InputComponentProps {
   control: Control<CompanyForm, any>,
