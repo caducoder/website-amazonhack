@@ -1,6 +1,8 @@
 
 # AmazonHack
 
+![](./src/assets/logo-readme.jpg)
+
 Um sistema que mapeia as torres de sinal de internet no estado do Amazonas.
 
 
