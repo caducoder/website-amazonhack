@@ -8,9 +8,9 @@ function CommomHeader() {
       <Box className='flex items-center justify-between w-full px-4 sm:px-16 gap-4 flex-col lg:flex-row'>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, cursor: 'pointer' }} onClick={() => router.push('/')}>
           <img src={'/logo-green.png'} alt='' />
-          <Typography className='text-mainGreen text-3xl sm:text-5xl'>
+          <p className='text-mainGreen font-medium text-3xl sm:text-4xl'>
             AmazonHack
-          </Typography>
+          </p>
         </Box>
       </Box>
     </Box>

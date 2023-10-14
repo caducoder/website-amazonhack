@@ -10,30 +10,30 @@ function Footer() {
       <div className='flex flex-row justify-between items-center w-full px-[100px]'>
         <div className='flex flex-col gap-4'>
           <img src="/logo-white.svg" alt="" />
-          <Typography className='text-[28px]'>AmazonHack</Typography>
-          <Typography width={207}>
+          <p className='text-[28px] font-medium'>AmazonHack</p>
+          <p className='w-[210px]'>
             Juntos tornamos Amazonas mais conectado
-          </Typography>
+          </p>
         </div>
         <div>
-          <Typography>Fale conosco</Typography>
-          <div>
+          <p className='font-semibold text-xl mb-6'>Fale conosco</p>
+          <div className='flex gap-2 font-medium mb-4'>
             <EmailRoundedIcon htmlColor='#fff' />
-            <Typography>
+            <p>
               amazonhack@gmail.com
-            </Typography>
+            </p>
           </div>
-          <div>
+          <div className='flex gap-2 font-medium mb-4'>
             <PlaceRoundedIcon htmlColor='#fff' />
-            <Typography>
-              Rua xxx, Manaus - AM cep: 123.123-000
-            </Typography>
+            <p>
+              Rua xxx, Manaus - AM <br /> cep: 123.123-000
+            </p>
           </div>
-          <div>
+          <div className='flex gap-2 font-medium'>
             <LocalPhoneRoundedIcon htmlColor='#fff' />
-            <Typography>
+            <p>
               92 12345-1234
-            </Typography>
+            </p>
           </div>
         </div>
       </div>

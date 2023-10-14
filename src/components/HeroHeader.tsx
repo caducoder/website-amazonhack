@@ -8,20 +8,19 @@ export const HeroHeader = () => {
       <Box className='flex items-center justify-between w-full px-16 gap-4 flex-col lg:flex-row'>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
           <img src={'/logo-white.svg'} alt='' />
-          <Typography variant='h3' color='white'>AmazonHack</Typography>
+          <h1 className='text-white text-4xl font-medium'>AmazonHack</h1>
         </Box>
         <Box sx={{ display: 'flex', flexDirection: 'row', gap: 8 }}>
           <Link href={'/register'}>
-            <Button className='bg-white text-mainGreen hover:bg-silver rounded-2xl px-6'>Cadastre a sua empresa</Button>
+            <button className='bg-white text-mainGreen transition hover:bg-silver rounded-2xl px-6 py-2'>Cadastre a sua empresa</button>
           </Link>
           <Link href={'/login'}>
-            <Button className='bg-white text-mainGreen hover:bg-silver rounded-2xl px-6'>
+            <button className='bg-white text-mainGreen transition hover:bg-silver rounded-2xl px-6 py-2'>
               Faça Login
-            </Button>
+            </button>
           </Link>
         </Box>
-
       </Box>
-    </Box >
+    </Box>
   )
 }

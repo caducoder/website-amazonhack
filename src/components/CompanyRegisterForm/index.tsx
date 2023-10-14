@@ -149,11 +149,11 @@ function CompanyRegisterForm() {
       </div>
       <div className="flex items-center justify-center">
 
-        <Button
+        <button
           type='submit'
-          className='bg-mainGreen text-white hover:bg-lightGreen rounded-2xl px-20 py-2 mt-14'>
+          className='bg-mainGreen transition text-white hover:bg-lightGreen rounded-2xl px-20 py-2 mt-14'>
           Cadastrar
-        </Button>
+        </button>
       </div>
     </form>
 
