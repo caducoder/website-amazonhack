@@ -28,13 +28,13 @@ export default function Home() {
           <img src="/imagem-rio.png" alt="Imagem do Rio Amazonas" width={'100%'} />
         </div>
 
-        <article className="flex flex-row justify-between w-[80%] mt-[130px]">
-          <section>
+        <article className="w-[95%] flex flex-col lg:flex-row justify-between sm:w-[80%] mt-[130px]">
+          <section >
             <h2 className='mb-2 text-goldenroad font-semibold text-6xl'>
               Objetivos
             </h2>
-            <p className='text-lg'>
-              O Amazonhack tem como objetivo principal xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            <p className='text-lg text-center lg:text-left'>
+              O Amazonhack tem como objetivo principal xxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxx
             </p>
             <div className='mt-14 flex flex-row gap-4 items-center'>
               <div className='bg-mainGreen w-[80px] h-[80px] flex justify-center items-center rounded-xl p-4'>
@@ -45,7 +45,7 @@ export default function Home() {
                   Aumentar a conexão
                 </p>
                 <p className='text-lg font-medium text-darkgrey'>
-                  O Amazonhack tem como objetivo principal xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                  O Amazonhack tem como objetivo principal xxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
                 </p>
               </div>
             </div>
@@ -58,7 +58,7 @@ export default function Home() {
                   Aumentar a conexão
                 </p>
                 <p className='text-lg font-medium text-darkgrey'>
-                  O Amazonhack tem como objetivo principal xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                  O Amazonhack tem como objetivo principal xxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
                 </p>
               </div>
             </div>
@@ -70,13 +70,13 @@ export default function Home() {
                 <p className='text-2xl text-goldenroad font-bold'>
                   Aumentar a conexão
                 </p>
-                <p className='text-lg font-medium text-darkgrey'>
-                  O Amazonhack tem como objetivo principal xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                <p className='text-sm sm:text-lg font-medium text-darkgrey'>
+                  O Amazonhack tem como objetivo principal xxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxx
                 </p>
               </div>
             </div>
           </section>
-          <div>
+          <div className='mt-10 lg:mt-0'>
             <img src="/casa-flutuante.png" alt="" />
           </div>
         </article>
