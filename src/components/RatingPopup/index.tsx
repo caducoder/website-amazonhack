@@ -34,19 +34,17 @@ function RatingPopup() {
 
   const handleRatingConfirm = () => {
     console.log('Nota: ', value)
+    handleClose()
   }
 
   return (
     <>
-      <Button
-        variant="contained"
-        color='secondary'
-        className="bg-cyan text-white"
-        sx={{ mb: 4 }}
+      <button
+        className='bg-mainGreen transition text-white hover:bg-darkGreen rounded-3xl px-20 py-2 mt-14 absolute top-0 mb-2'
         onClick={handleClickOpen}
       >
         Classificar internet da sua região
-      </Button>
+      </button>
       <Dialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
@@ -84,7 +82,7 @@ function RatingPopup() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} variant='text' color='error'>Cancelar</Button>
-          <Button autoFocus onClick={handleRatingConfirm} color='success'>
+          <Button autoFocus onClick={handleRatingConfirm} color='success' disabled={value == null}>
             Confirmar
           </Button>
         </DialogActions>

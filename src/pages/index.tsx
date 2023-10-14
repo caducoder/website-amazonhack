@@ -13,8 +13,8 @@ export default function Home() {
       className={`${montserrat.className}`}
     >
       <HeroHeader />
-      {/* <RatingPopup /> */}
-      <div className='w-[95%] mx-auto lg:w-[80%]'>
+      <div className='w-[95%] mx-auto lg:w-[80%] relative'>
+        <RatingPopup />
         <Map />
       </div>
       <div className='flex flex-col items-center mt-4 mb-8'>
