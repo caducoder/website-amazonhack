@@ -20,7 +20,7 @@ function Footer() {
           <div className='flex gap-2 font-medium mb-4'>
             <EmailRoundedIcon htmlColor='#fff' />
             <p>
-              amazonhack@gmail.com
+              amazonhackcp@gmail.com
             </p>
           </div>
 
