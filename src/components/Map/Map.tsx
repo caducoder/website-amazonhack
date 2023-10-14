@@ -3,6 +3,11 @@ import React, { useState } from 'react'
 import { MapContainer, Marker, Polygon, Popup, TileLayer, useMapEvents } from 'react-leaflet'
 import { Icon, LatLngExpression, LatLng } from 'leaflet'
 import { Typography } from '@mui/material'
+import { TowerLocation } from '@/context/MapContext'
+
+interface MainMap {
+  towerLocations: TowerLocation[]
+}
 
 function LocationMarker() {
   const [position, setPosition] = useState<LatLng | null>(null)
@@ -36,7 +41,7 @@ const amazonasCoordinates: LatLngExpression[] = [
 
 const greenColor = { color: 'green' }
 
-const Map = () => {
+const Map = ({ towerLocations }: MainMap) => {
   return (
     <section className='flex justify-center flex-col'>
 
@@ -49,17 +54,22 @@ const Map = () => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker
-          position={[-3.10, -60]}
-          icon={new Icon({ iconUrl: '/tower.png', iconSize: [25, 41], iconAnchor: [12, 41] })}
-        >
-          <Popup>
-            <Typography variant='body1'>
-              Status: <Typography component={'span'} variant='body1' className='font-bold'>Ativo</Typography>
-            </Typography>
-          </Popup>
-          <Polygon pathOptions={greenColor} positions={amazonasCoordinates} />
-        </Marker>
+        {towerLocations ? (
+          towerLocations.map(loc => (
+            <Marker
+              position={loc.latLng!}
+              icon={new Icon({ iconUrl: '/tower.png', iconSize: [25, 41], iconAnchor: [12, 41] })}
+            >
+              <Popup>
+                <Typography variant='body1'>
+                  Id: <Typography component={'span'} variant='body1' className='font-bold'>{loc.id}</Typography>
+                </Typography>
+              </Popup>
+            </Marker>
+          ))
+        ) : null}
+
+        <Polygon pathOptions={greenColor} positions={amazonasCoordinates} />
         <LocationMarker />
       </MapContainer>
     </section>

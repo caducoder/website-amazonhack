@@ -1,6 +1,10 @@
+import IntMap from '@/InteractiveMap';
 import CommomHeader from '@/components/CommomHeader'
-import React from 'react'
+import MapContext from '@/context/MapContext';
+import { LatLng } from 'leaflet';
+import React, { useState, useContext } from 'react'
 import { Controller, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 interface NetworkData {
   numeroIdentificacao: number | undefined,
@@ -12,9 +16,35 @@ interface NetworkData {
 
 function Networkegister() {
   const { control, handleSubmit, formState: { errors } } = useForm<NetworkData>();
+  const [position, setPosition] = useState<LatLng | null>(null);
+  const { addLocation } = useContext(MapContext)
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: NetworkData) => {
     console.log(data)
+    if (position) {
+      toast.success(`Torre cadastrada! ${position}`, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: "light",
+      });
+      addLocation({ id: data.numeroIdentificacao!, latLng: position })
+    } else {
+      toast.warning('Marque a localização no mapa!', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: "light",
+      })
+    }
   }
 
   return (
@@ -140,8 +170,9 @@ function Networkegister() {
                 {errors.municipio && <p className="text-red text-xs italic">Campo obrigatório</p>}
               </div>
             </div>
-            <div>
-              <img src="https://fakeimg.pl/400/?text=Mapa" />
+            <div className='w-[400px] h-[400px]' >
+              {/* <img src="https://fakeimg.pl/400/?text=Mapa" /> */}
+              <IntMap position={position} setPosition={setPosition} />
             </div>
           </form>
           <div className='flex justify-center mt-10'>

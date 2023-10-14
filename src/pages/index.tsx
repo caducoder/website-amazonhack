@@ -1,13 +1,19 @@
+import { useContext, useEffect } from 'react'
 import { Montserrat } from 'next/font/google'
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import { HeroHeader } from '@/components/HeroHeader';
 import Map from '@/components/Map/';
 import RatingPopup from '@/components/RatingPopup';
 import Footer from '@/components/Footer';
+import MapContext from '@/context/MapContext';
 
 const montserrat = Montserrat({ subsets: ['latin'] })
 
 export default function Home() {
+  const { towerLocations } = useContext(MapContext)
+  useEffect(() => {
+    console.log('oi')
+  }, [towerLocations]);
   return (
     <main
       className={`${montserrat.className}`}
@@ -15,7 +21,7 @@ export default function Home() {
       <HeroHeader />
       <div className='w-[95%] mx-auto lg:w-[80%] relative'>
         <RatingPopup />
-        <Map />
+        <Map towerLocations={towerLocations} />
       </div>
       <div className='flex flex-col items-center mt-4 mb-8'>
         <h1 className='mb-8 mt-10 font-semibold text-center text-goldenroad text-6xl'>
