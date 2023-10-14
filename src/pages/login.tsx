@@ -13,6 +13,8 @@ const LoginForm: React.FC = () => {
 
   const onSubmit: SubmitHandler<LoginData> = (data) => {
     console.log('Dados do formulário login:', data);
+
+    router.push('/network-register')
   };
 
   return (

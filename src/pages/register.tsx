@@ -14,9 +14,9 @@ const Register = () => {
           <h1 className='text-center text-[40px] mb-[14px] text-goldenroad font-semibold'>
             Cadastre sua empresa
           </h1>
-          <Typography className='text-center w-full sm:px-16 text-darkgrey'>
+          <p className='text-center w-full sm:px-16 text-darkgrey'>
             Cadastrando sua empresa, você poderá realizar o registro de suas redes de transmissão que ficarão disponíveis no mapa AmazonHack.  Isso irá ajudar a filtrar os pontos de maior e menor conexão no estado do Amazonas.
-          </Typography>
+          </p>
         </Box>
         <CompanyRegisterForm />
       </section>
