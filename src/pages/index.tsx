@@ -55,7 +55,7 @@ export default function Home() {
             </h2>
 
             <ObjectiveCard
-              titulo='Mapear a localização comp'
+              titulo='Mapear a localização'
               icon={<CheckRoundedIcon fontSize='large' htmlColor='#fff' />}
             >
               Mapear a localização precisa de todas as antenas de comunicação na região do Amazonas, além de avaliar a eficácia da cobertura de sinal em toda a região, identificando áreas com problemas de conectividade.
