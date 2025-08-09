@@ -1,38 +1,42 @@
-import IntMap from '@/InteractiveMap';
-import CommomHeader from '@/components/CommomHeader'
-import MapContext from '@/context/MapContext';
+import IntMap from '@/components/InteractiveMap';
+import CommomHeader from '@/components/CommomHeader';
 import { LatLng } from 'leaflet';
-import React, { useState, useContext } from 'react'
-import { Controller, useForm } from 'react-hook-form';
+import React, { useState, useContext } from 'react';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import { collection, getDocs, addDoc } from 'firebase/firestore';
+import { db } from '@/firebase-config';
 
 interface NetworkData {
   numeroIdentificacao: number | undefined,
   cep: string,
-  logradouro: string
+  logradouro: string;
   bairro: string,
-  municipio: string
+  municipio: string;
 }
 
 function Networkegister() {
   const { control, handleSubmit, formState: { errors } } = useForm<NetworkData>();
   const [position, setPosition] = useState<LatLng | null>(null);
-  const { addLocation } = useContext(MapContext)
+  const towerCollectionRef = collection(db, "towers");
 
-  const onSubmit = (data: NetworkData) => {
-    console.log(data)
+  const onSubmit: SubmitHandler<NetworkData> = async (data) => {
+    console.log(data);
+    const dataWithLatLng = { ...data, id: data.numeroIdentificacao!, ...position };
     if (position) {
-      toast.success(`Torre cadastrada! ${position}`, {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false,
-        progress: undefined,
-        theme: "light",
-      });
-      addLocation({ id: data.numeroIdentificacao!, latLng: position })
+      addDoc(towerCollectionRef, dataWithLatLng)
+        .then(resp => {
+          toast.success(`Torre cadastrada! ${position}`, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+            theme: "light",
+          });
+        });
     } else {
       toast.warning('Marque a localização no mapa!', {
         position: "top-right",
@@ -43,9 +47,9 @@ function Networkegister() {
         draggable: false,
         progress: undefined,
         theme: "light",
-      })
+      });
     }
-  }
+  };
 
   return (
     <>
@@ -171,7 +175,7 @@ function Networkegister() {
               </div>
             </div>
             <div className='w-[400px] h-[400px]' >
-              {/* <img src="https://fakeimg.pl/400/?text=Mapa" /> */}
+
               <IntMap position={position} setPosition={setPosition} />
             </div>
           </form>
@@ -187,7 +191,7 @@ function Networkegister() {
         </div>
       </section>
     </>
-  )
+  );
 }
 
-export default Networkegister
+export default Networkegister;

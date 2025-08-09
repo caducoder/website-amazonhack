@@ -1,25 +1,24 @@
-import 'leaflet/dist/leaflet.css'
-import React, { useState } from 'react'
-import { MapContainer, Marker, Polygon, Popup, TileLayer, useMapEvents } from 'react-leaflet'
-import { Icon, LatLngExpression, LatLng } from 'leaflet'
-import { Typography } from '@mui/material'
-import { TowerLocation } from '@/context/MapContext'
+import 'leaflet/dist/leaflet.css';
+import React, { useState } from 'react';
+import { MapContainer, Marker, Polygon, Popup, TileLayer, useMapEvents } from 'react-leaflet';
+import { Icon, LatLngExpression, LatLng } from 'leaflet';
+import { Typography } from '@mui/material';
 
 interface MainMap {
-  towerLocations: TowerLocation[]
+  towerLocations: NetworkTower[];
 }
 
 function LocationMarker() {
-  const [position, setPosition] = useState<LatLng | null>(null)
+  const [position, setPosition] = useState<LatLng | null>(null);
   const map = useMapEvents({
     click() {
-      map.locate()
+      map.locate();
     },
     locationfound(e) {
-      setPosition(e.latlng)
-      map.flyTo(e.latlng, map.getZoom())
+      setPosition(e.latlng);
+      map.flyTo(e.latlng, map.getZoom());
     },
-  })
+  });
 
   return position === null ? null : (
     <Marker
@@ -28,7 +27,7 @@ function LocationMarker() {
     >
       <Popup className='mt-[-10px]'>Você está aqui</Popup>
     </Marker>
-  )
+  );
 }
 
 const amazonasCoordinates: LatLngExpression[] = [
@@ -37,11 +36,12 @@ const amazonasCoordinates: LatLngExpression[] = [
   [-7.13, -73.72],
   [-9.25, -65.3],
   [-8.67, -58.62]
-]
+];
 
-const greenColor = { color: 'green' }
+const greenColor = { color: 'green' };
 
 const Map = ({ towerLocations }: MainMap) => {
+  console.log('tower locations form db', towerLocations);
   return (
     <section className='flex justify-center flex-col'>
 
@@ -57,7 +57,7 @@ const Map = ({ towerLocations }: MainMap) => {
         {towerLocations ? (
           towerLocations.map(loc => (
             <Marker
-              position={loc.latLng!}
+              position={[loc.lat, loc.lng]}
               icon={new Icon({ iconUrl: '/tower.png', iconSize: [25, 41], iconAnchor: [12, 41] })}
             >
               <Popup>
@@ -73,7 +73,7 @@ const Map = ({ towerLocations }: MainMap) => {
         <LocationMarker />
       </MapContainer>
     </section>
-  )
-}
+  );
+};
 
-export default Map
+export default Map;

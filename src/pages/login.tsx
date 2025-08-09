@@ -1,20 +1,20 @@
 import CommomHeader from '@/components/CommomHeader';
-import router from 'next/router'
+import router from 'next/router';
 import React from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
-
-export interface LoginData {
-  email: string;
-  password: string;
-}
+import { useAuth } from '@/context/AuthContext';
 
 const LoginForm: React.FC = () => {
-  const { control, handleSubmit, formState: { errors } } = useForm<LoginData>();
+  const { login } = useAuth();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<LoginData>();
 
-  const onSubmit: SubmitHandler<LoginData> = (data) => {
-    console.log('Dados do formulário login:', data);
+  const onSubmit: SubmitHandler<LoginData> = async (data) => {
 
-    router.push('/network-register')
+    login(data);
   };
 
   return (

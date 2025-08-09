@@ -1,20 +1,31 @@
-import { useContext, useEffect } from 'react'
-import { Montserrat } from 'next/font/google'
+import { useContext, useEffect, useState } from 'react';
+import { Montserrat } from 'next/font/google';
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import { HeroHeader } from '@/components/HeroHeader';
 import Map from '@/components/Map/';
 import RatingPopup from '@/components/RatingPopup';
 import Footer from '@/components/Footer';
-import MapContext from '@/context/MapContext';
 import ObjectiveCard from '@/components/ObjectiveCard';
+import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase/firestore';
+import { db } from '@/firebase-config';
 
-const montserrat = Montserrat({ subsets: ['latin'] })
+const montserrat = Montserrat({ subsets: ['latin'] });
 
 export default function Home() {
-  const { towerLocations } = useContext(MapContext)
+  const [towers, setTowers] = useState<NetworkTower[]>([]);
+  const towersCollectionRef = collection(db, "towers");
+
+  const getTowersInfo = async () => {
+    const data = await getDocs(towersCollectionRef);
+    const fetchedTowers: NetworkTower[] = data.docs.map(doc => ({ ...doc.data(), key: doc.id }));
+
+    setTowers(fetchedTowers);
+  };
+
   useEffect(() => {
-    console.log('oi')
-  }, [towerLocations]);
+    getTowersInfo();
+  }, []);
+
 
   return (
     <main
@@ -23,7 +34,7 @@ export default function Home() {
       <HeroHeader />
       <div className='w-[95%] mx-auto lg:w-[80%] relative'>
         <RatingPopup />
-        <Map towerLocations={towerLocations} />
+        <Map towerLocations={towers} />
       </div>
       <div className='flex flex-col items-center mt-4 mb-8'>
         <h1 className='mb-8 mt-10 font-semibold text-center text-goldenroad text-6xl'>
@@ -55,7 +66,7 @@ export default function Home() {
             </h2>
 
             <ObjectiveCard
-              titulo='Mapear a localização comp'
+              titulo='Mapear a localização'
               icon={<CheckRoundedIcon fontSize='large' htmlColor='#fff' />}
             >
               Mapear a localização precisa de todas as antenas de comunicação na região do Amazonas, além de avaliar a eficácia da cobertura de sinal em toda a região, identificando áreas com problemas de conectividade.
@@ -104,5 +115,5 @@ export default function Home() {
       </div>
       <Footer />
     </main>
-  )
+  );
 }
