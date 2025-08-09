@@ -1,41 +1,39 @@
-import React from 'react'
-import { Control, FieldErrors, Controller, FieldError } from 'react-hook-form'
-import { CompanyForm } from '../CompanyRegisterForm'
-import { LoginData } from '@/pages/login'
+import React, { InputHTMLAttributes, forwardRef } from 'react'
+import { FieldError } from 'react-hook-form'
 
-interface InputComponentProps {
-  control: Control<CompanyForm, any>,
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string,
-  name: "nomeFantasia" | "cnpj" | "endereco" | "email" | "senha" | "razaoSocial" | "inscricaoEstadual" | "inscricaoMunicipal" | "celular" | "telefone" | "cep" | "logradouro" | "bairro" | "complemento" | "uf" | "mun",
-  error: FieldError | undefined,
-  required?: boolean
+  errors: FieldError | undefined,
+  emphasis?: boolean
 }
 
-function InputComponent({ control, label, name, error, required = false }: InputComponentProps) {
-  return (
-    <div className="mb-4">
-      <label className="block text-gray-700 text-sm mb-2" htmlFor={name}>
-        {label}
-      </label>
-      {/* <Input variant='outlined' /> */}
-      <Controller
-        name={name}
-        control={control}
-        defaultValue=""
-        rules={{ required: required }}
-        render={({ field }) => (
-          <input
-            {...field}
-            placeholder={label}
-            type="text"
-            id="nome"
-            className={`w-full appearance-none border border-darkgrey rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${error ? 'border-red' : ''}`}
-          />
-        )}
-      />
-      {error && <p className="text-red text-xs italic">Campo obrigatório</p>}
-    </div>
-  )
-}
+const InputComponent = forwardRef<HTMLInputElement, InputProps>(
+  ({ label, name, type = 'text', errors, emphasis = false, ...rest }, ref) => {
+    return (
+      <div className="mb-4">
+        <label
+          className={`block text-gray-700 mb-2 ${emphasis ? 'font-semibold text-lg' : 'text-sm'}`}
+          htmlFor={name}
+        >
+          {label}
+        </label>
+        <input
+          placeholder={label}
+          type={type}
+          name={name}
+          ref={ref}
+          className={`
+            w-full appearance-none border border-darkgrey rounded py-2 px-3 text-gray-700 
+            leading-tight focus:outline-none focus:shadow-outline 
+            ${errors ? 'border-red' : ''}
+          `}
+          {...rest}
+        />
+        {errors && <p className="text-red text-xs italic">{errors.message}</p>}
+      </div>
+    )
+  }
+)
+
 
 export default InputComponent

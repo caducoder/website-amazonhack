@@ -28,7 +28,7 @@ export interface CompanyForm {
 }
 
 function CompanyRegisterForm() {
-  const { handleSubmit, control, formState: { errors } } = useForm<CompanyForm>();
+  const { handleSubmit, register, formState: { errors } } = useForm<CompanyForm>();
   const companyCollectionRef = collection(db, "companies");
 
   const onSubmit: SubmitHandler<CompanyForm> = async (data) => {
@@ -63,69 +63,66 @@ function CompanyRegisterForm() {
       <div className='flex flex-col sm:flex-row gap-4 justify-center'>
         <div>
           <InputComponent
-            control={control}
-            error={errors.cnpj}
+            {...register('cnpj', { required: 'Campo obrigatório' })}
             label='CNPJ'
             name='cnpj'
-            required
+            errors={errors.cnpj}
           />
           <InputComponent
-            control={control}
-            error={errors.nomeFantasia}
+            {...register('nomeFantasia')}
             label='Nome Fantasia'
             name='nomeFantasia'
+            errors={errors.nomeFantasia}
           />
           <InputComponent
-            control={control}
-            error={errors.razaoSocial}
+            {...register('razaoSocial')}
             label='Razão Social'
             name='razaoSocial'
+            errors={errors.razaoSocial}
           />
           <div className='flex flex-row gap-2'>
             <InputComponent
-              control={control}
-              error={errors.inscricaoEstadual}
+              {...register('inscricaoEstadual', { required: 'Campo obrigatório' })}
               label='Inscrição Estadual'
               name='inscricaoEstadual'
-              required
+              errors={errors.inscricaoEstadual}
             />
             <InputComponent
-              control={control}
-              error={errors.inscricaoMunicipal}
+              {...register('inscricaoMunicipal')}
               label='Inscrição Municipal'
               name='inscricaoMunicipal'
+              errors={errors.inscricaoMunicipal}
             />
           </div>
           <div className='flex flex-row gap-2'>
             <InputComponent
-              control={control}
-              error={errors.celular}
+              {...register('celular', { required: 'Campo obrigatório' })}
               label='Celular'
               name='celular'
-              required
+              errors={errors.celular}
             />
             <InputComponent
-              control={control}
-              error={errors.telefone}
+              {...register('telefone')}
               label='Telefone'
               name='telefone'
+              errors={errors.telefone}
             />
           </div>
 
           <div className='flex flex-row gap-2'>
             <InputComponent
-              control={control}
-              error={errors.email}
+              {...register('email', { required: 'Campo obrigatório' })}
               label='Email'
               name='email'
-              required
+              type='email'
+              errors={errors.email}
             />
             <InputComponent
-              control={control}
-              error={errors.senha}
+              {...register('senha', { required: 'Campo obrigatório' })}
               label='Senha'
               name='senha'
-              required
+              type='password'
+              errors={errors.senha}
             />
           </div>
 
@@ -133,49 +130,54 @@ function CompanyRegisterForm() {
         <div >
           <div className='flex flex-row gap-2'>
             <InputComponent
-              control={control}
+              {...register('cep', {
+                required: 'Campo obrigatório',
+                pattern: {
+                  value: /^\d{5}-\d{3}$/,
+                  message: 'Formato inválido'
+                }
+              })}
               label='CEP'
               name='cep'
-              error={errors.cep}
-              required
+              errors={errors.cep}
             />
             <InputComponent
-              control={control}
+              {...register('logradouro')}
               label='Logradouro'
               name='logradouro'
-              error={errors.logradouro}
+              errors={errors.logradouro}
             />
           </div>
           <InputComponent
-            control={control}
+            {...register('bairro')}
             label='Bairro'
             name='bairro'
-            error={errors.bairro}
+            errors={errors.bairro}
           />
           <InputComponent
-            control={control}
+            {...register('complemento')}
             label='Complemento'
             name='complemento'
-            error={errors.complemento}
+            errors={errors.complemento}
           />
           <div className='flex flex-row gap-2'>
             <InputComponent
-              control={control}
+              {...register('uf')}
               label='UF'
               name='uf'
-              error={errors.uf}
+              errors={errors.uf}
             />
             <InputComponent
-              control={control}
+              {...register('mun')}
               label='Mun'
               name='mun'
-              error={errors.mun}
+              errors={errors.mun}
             />
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-center">
 
+      <div className="flex items-center justify-center">
         <button
           type='submit'
           className='bg-mainGreen transition text-white hover:bg-darkGreen rounded-2xl px-20 py-2 mt-14'>
@@ -183,7 +185,6 @@ function CompanyRegisterForm() {
         </button>
       </div>
     </form>
-
   );
 }
 

@@ -1,7 +1,8 @@
 import CommomHeader from '@/components/CommomHeader';
+import InputComponent from '@/components/InputComponent';
 import router from 'next/router';
 import React from 'react';
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { useAuth } from '@/context/AuthContext';
 
 const LoginForm: React.FC = () => {
@@ -9,7 +10,8 @@ const LoginForm: React.FC = () => {
   const {
     control,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
+    register
   } = useForm<LoginData>();
 
   const onSubmit: SubmitHandler<LoginData> = async (data) => {
@@ -26,45 +28,23 @@ const LoginForm: React.FC = () => {
         </h2>
         <form onSubmit={handleSubmit(onSubmit)} className="bg-white rounded px-8 pt-6 w-full sm:w-[650px] flex flex-col justify-center items-center mx-auto">
 
-          <div className="mb-6 w-full">
-            <label className="block text-gray-700 text-lg font-semibold mb-2" htmlFor={'email'}>
-              Email
-            </label>
-            {/* <Input variant='outlined' /> */}
-            <Controller
-              name={'email'}
-              control={control}
-              defaultValue=""
-              rules={{ required: true }}
-              render={({ field }) => (
-                <input
-                  {...field}
-                  placeholder='Email'
-                  type="text"
-                  id="nome"
-                  className={`w-full appearance-none border border-darkgrey rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.email ? 'border-red' : ''}`}
-                />
-              )}
+          <div className="mb-2 w-full">
+            <InputComponent
+              {...register('email', { required: 'Campo obrigatório' })}
+              label='Email'
+              name='email'
+              errors={errors.email}
+              emphasis
             />
-            {errors.email && <p className="text-red text-xs italic">Campo obrigatório</p>}
           </div>
 
-          <div className="mb-4 w-full">
-            <label className="block text-gray-700 text-lg font-semibold mb-2" htmlFor="password">
-              Senha
-            </label>
-            <Controller
-              name="password"
-              control={control}
-              rules={{ required: true }}
-              render={({ field }) => (
-                <input
-                  {...field}
-                  type="password"
-                  className={`w-full appearance-none border border-darkgrey rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.password ? 'border-red' : ''}`}
-                  placeholder="Sua senha"
-                />
-              )}
+          <div className="w-full">
+            <InputComponent
+              {...register('password', { required: 'Campo obrigatório' })}
+              label='Senha'
+              name='password'
+              errors={errors.password}
+              emphasis
             />
           </div>
           <div className='w-full relative'>
@@ -81,7 +61,7 @@ const LoginForm: React.FC = () => {
           </div>
 
         </form>
-        <div className=' text-center'>
+        <div className='text-center mb-4'>
           <p>
             Não possui cadastro? {' '}
             <button className='whitespace-nowrap font-semibold' onClick={() => router.push('/register')}>
