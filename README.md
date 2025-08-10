@@ -14,6 +14,12 @@
 
 Sistema de mapeamento abrangente que detecta as áreas com problemas de conectividade na região. Esse sistema oferece uma visão clara e atualizada do status de implementação de antenas em todo o estado do Amazonas, o que, por sua vez, fornece informações valiosas para atrair investimentos direcionados às áreas que mais necessitam.
 
+## 🏆 Vencedor do Hackathon
+
+Temos o prazer de anunciar que este projeto foi o **vencedor do [Hackathon Desafio Amazônia que eu quero](https://brasil.campus-party.org/cpamazonia/hackathons/desafio-amazonia-que-quero/)**!
+
+Obrigado a todos que nos apoiaram durante o evento!
+
 ### :construction: Aviso de Funcionalidades Incompletas
 
 Este projeto está em constante desenvolvimento e as funcionalidades podem não estar 100% completas neste momento. Estamos trabalhando para aprimorar e expandir as capacidades do site.
@@ -39,6 +45,12 @@ Este projeto está em constante desenvolvimento e as funcionalidades podem não 
 ## :movie_camera: Demonstração
 
 Link do vídeo demo: https://www.youtube.com/watch?v=24e8JxXme4g
+
+## Funcionalidades
+
+- Adição de torre no mapa
+- Avaliação do sinal na região
+- Listagem das torres da compania
 
 ## :shield: Equipe
 
