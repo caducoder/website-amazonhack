@@ -2,9 +2,10 @@ import React from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
-import router from 'next/router';
+import router, { useRouter } from 'next/router';
 
 export const HeroHeader = () => {
+  const router = useRouter();
   const { user, logout } = useAuth();
   // console.log('User', user);
   return (

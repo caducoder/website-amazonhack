@@ -1,12 +1,13 @@
 import CommomHeader from '@/components/CommomHeader';
 import InputComponent from '@/components/InputComponent';
-import router from 'next/router';
+import router, { useRouter } from 'next/router';
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useAuth } from '@/context/AuthContext';
 
 const LoginForm: React.FC = () => {
   const { login } = useAuth();
+  const router = useRouter();
   const {
     control,
     handleSubmit,

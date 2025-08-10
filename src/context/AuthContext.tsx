@@ -2,7 +2,7 @@ import { signInWithEmailAndPassword, User } from 'firebase/auth';
 import React, { createContext, ReactNode, useContext, useState } from 'react';
 import { db, auth } from '@/firebase-config';
 import { toast } from 'react-toastify';
-import router from 'next/router';
+import router, { useRouter } from 'next/router';
 
 const AuthContext = createContext({
   user: {} as User | null,
@@ -14,6 +14,7 @@ const AuthContext = createContext({
 export function AuthProvider({ children }: { children: ReactNode; }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const login = async ({ email, password }: LoginData) => {
     setIsLoading(true);

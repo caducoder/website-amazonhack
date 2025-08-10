@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { collection, getDocs, addDoc, setDoc, updateDoc, doc, deleteDoc } from 'firebase/firestore';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { db, auth } from '@/firebase-config';
-import router from 'next/router';
+import router, { useRouter } from 'next/router';
 
 export interface CompanyForm {
   nomeFantasia: string,
@@ -30,7 +30,7 @@ export interface CompanyForm {
 
 function CompanyRegisterForm() {
   const { handleSubmit, register, formState: { errors } } = useForm<CompanyForm>();
-
+  const router = useRouter();
 
   const onSubmit: SubmitHandler<CompanyForm> = async (data) => {
 

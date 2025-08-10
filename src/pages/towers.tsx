@@ -3,7 +3,7 @@ import { useAuth } from '@/context/AuthContext';
 import { db } from '@/firebase-config';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import React, { useCallback, useEffect, useState } from 'react';
-import router from 'next/router';
+import router, { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { MapPin, Navigation, Home, Hash } from 'lucide-react';
 
@@ -11,6 +11,7 @@ function Towers() {
   const { user } = useAuth();
   const [towersList, setTowersList] = useState<NetworkTower[]>([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   const getCompanyTowers = useCallback(async (uid: string) => {
     setLoading(true);

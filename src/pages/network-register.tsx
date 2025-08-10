@@ -1,7 +1,7 @@
 import IntMap from '@/components/InteractiveMap';
 import CommomHeader from '@/components/CommomHeader';
 import { LatLng } from 'leaflet';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { collection, getDocs, addDoc } from 'firebase/firestore';
@@ -25,41 +25,32 @@ function Networkegister() {
   const towerCollectionRef = collection(db, "towers");
 
   const onSubmit: SubmitHandler<NetworkData> = async (data) => {
-    console.log(data);
-    const dataWithLatLng = { ...data, userId: user?.uid, id: data.numeroIdentificacao!, ...position };
-    if (position) {
-      addDoc(towerCollectionRef, dataWithLatLng)
-        .then(resp => {
-          toast.success(`Torre cadastrada! ${position}`, {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: false,
-            progress: undefined,
-            theme: "light",
-          });
-          router.push("/towers");
-        });
+    if (!user) {
+      toast.error("Você precisa estar logado para cadastrar uma torre.");
+      return;
+    }
 
+    const dataWithLatLng = { ...data, userId: user.uid, ...position };
+
+    if (position) {
+      try {
+        await addDoc(towerCollectionRef, dataWithLatLng);
+        toast.success(`Torre cadastrada com sucesso!`);
+        router.push("/towers"); // Agora o 'router' existe e pode ser usado
+      } catch (error) {
+        console.error("Erro ao cadastrar torre:", error);
+        toast.error("Ocorreu um erro ao cadastrar a torre.");
+      }
     } else {
-      toast.warning('Marque a localização no mapa!', {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false,
-        progress: undefined,
-        theme: "light",
-      });
+      toast.warning('Marque a localização no mapa!');
     }
   };
 
-  if (!user) {
-    router.push("/login");
-  }
+  useEffect(() => {
+    if (user === null) { // 'null' indica que a verificação de auth terminou e não há usuário
+      router.push("/login");
+    }
+  }, [user, router]);
 
   return (
     <>
