@@ -1,5 +1,5 @@
 import { signInWithEmailAndPassword, User } from 'firebase/auth';
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, ReactNode, useContext, useState } from 'react';
 import { db, auth } from '@/firebase-config';
 import { toast } from 'react-toastify';
 import router from 'next/router';
@@ -11,7 +11,7 @@ const AuthContext = createContext({
   isLoading: false
 });
 
-export function AuthProvider({ children }) {
+export function AuthProvider({ children }: { children: ReactNode; }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -20,7 +20,6 @@ export function AuthProvider({ children }) {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-      console.log("User", user);
       setUser(user);
       toast.success("Bem-vindo de volta!");
       router.push('/network-register');

@@ -6,6 +6,8 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { collection, getDocs, addDoc } from 'firebase/firestore';
 import { db } from '@/firebase-config';
+import { useAuth } from '@/context/AuthContext';
+import router from 'next/router';
 
 interface NetworkData {
   numeroIdentificacao: number | undefined,
@@ -16,13 +18,14 @@ interface NetworkData {
 }
 
 function Networkegister() {
+  const { user } = useAuth();
   const { control, handleSubmit, formState: { errors } } = useForm<NetworkData>();
   const [position, setPosition] = useState<LatLng | null>(null);
   const towerCollectionRef = collection(db, "towers");
 
   const onSubmit: SubmitHandler<NetworkData> = async (data) => {
     console.log(data);
-    const dataWithLatLng = { ...data, id: data.numeroIdentificacao!, ...position };
+    const dataWithLatLng = { ...data, userId: user?.uid, id: data.numeroIdentificacao!, ...position };
     if (position) {
       addDoc(towerCollectionRef, dataWithLatLng)
         .then(resp => {
@@ -36,7 +39,9 @@ function Networkegister() {
             progress: undefined,
             theme: "light",
           });
+          router.push("/towers");
         });
+
     } else {
       toast.warning('Marque a localização no mapa!', {
         position: "top-right",
@@ -50,6 +55,10 @@ function Networkegister() {
       });
     }
   };
+
+  if (!user) {
+    router.push("/login");
+  }
 
   return (
     <>

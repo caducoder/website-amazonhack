@@ -110,7 +110,6 @@ export default function Home() {
               Os recursos captados serão direcionados para o aprimoramento contínuo de nosso sistema de mapeamento, bem como para investimentos em infraestrutura de conectividade, capacitação local e programas de conscientização comunitária. Nós garantimos a máxima transparência e eficiência na alocação desses recursos para maximizar o impacto de cada investimento.
             </ObjectiveCard>
           </section>
-
         </article>
       </div>
       <Footer />

@@ -5,8 +5,9 @@ import Link from 'next/link';
 import InputComponent from '../InputComponent';
 import { toast } from 'react-toastify';
 import { collection, getDocs, addDoc, setDoc, updateDoc, doc, deleteDoc } from 'firebase/firestore';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { db, auth } from '@/firebase-config';
+import router from 'next/router';
 
 export interface CompanyForm {
   nomeFantasia: string,
@@ -29,14 +30,18 @@ export interface CompanyForm {
 
 function CompanyRegisterForm() {
   const { handleSubmit, register, formState: { errors } } = useForm<CompanyForm>();
-  const companyCollectionRef = collection(db, "companies");
+
 
   const onSubmit: SubmitHandler<CompanyForm> = async (data) => {
-    console.log(data);
+
     const { email, senha, ...rest } = data;
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
       const user = userCredential.user;
+
+      await updateProfile(user, {
+        displayName: data.nomeFantasia,
+      });
 
       await setDoc(doc(db, 'companies', user.uid), {
         ...rest,
@@ -52,6 +57,7 @@ function CompanyRegisterForm() {
         progress: undefined,
         theme: "light",
       });
+      router.push("/login");
     } catch (error) {
       console.error("Erro no registro:", error);
       toast.error("Ocorreu um erro inesperado. Por favor, tente mais tarde.");
