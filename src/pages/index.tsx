@@ -17,7 +17,7 @@ export default function Home() {
 
   const getTowersInfo = async () => {
     const data = await getDocs(towersCollectionRef);
-    const fetchedTowers: NetworkTower[] = data.docs.map(doc => ({ ...doc.data(), key: doc.id }));
+    const fetchedTowers: any[] = data.docs.map(doc => ({ ...doc.data(), key: doc.id }));
 
     setTowers(fetchedTowers);
   };
