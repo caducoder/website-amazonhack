@@ -19,7 +19,7 @@ function Towers() {
       const q = query(towersCollectionRef, where("userId", "==", uid));
       const querySnapshot = await getDocs(q);
 
-      const companyTowers = querySnapshot.docs.map(doc => ({
+      const companyTowers: any[] = querySnapshot.docs.map(doc => ({
         key: doc.id,
         ...doc.data(),
       }));
