@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { collection, getDocs, addDoc } from 'firebase/firestore';
 import { db } from '@/firebase-config';
 import { useAuth } from '@/context/AuthContext';
-import router from 'next/router';
+import router, { useRouter } from 'next/router';
 
 interface NetworkData {
   numeroIdentificacao: number | undefined,
@@ -18,6 +18,7 @@ interface NetworkData {
 }
 
 function Networkegister() {
+  const router = useRouter();
   const { user } = useAuth();
   const { control, handleSubmit, formState: { errors } } = useForm<NetworkData>();
   const [position, setPosition] = useState<LatLng | null>(null);

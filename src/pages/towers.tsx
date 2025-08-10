@@ -33,7 +33,6 @@ function Towers() {
     }
   }, []);
 
-  console.log("Torres", towersList);
 
   useEffect(() => {
     if (user) {
